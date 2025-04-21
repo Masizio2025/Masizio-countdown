@@ -11,7 +11,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Masizio Sposi">
-    <!-- *** AGGIORNATO LINK ICONA APPLE *** -->
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall512.png">
 
     <style>
@@ -21,7 +20,7 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #001546; display: flex; justify-content: center; align-items: center; text-align: center; position: relative; padding: 20px 0; }
 
         /* --- Contenitori Sfondo Animato --- */
-        #bubble-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; display: none; /* Inizialmente nascosto */ }
+        #bubble-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; display: none; }
         .bubble { position: absolute; background-image: url('https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/bolla.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 50%; opacity: 0; animation: rise 15s infinite ease-in-out, sway 6s infinite ease-in-out alternate, rotate 12s infinite linear; transform-origin: center center; filter: blur(0.5px); bottom: -200px; }
         @keyframes rise { 0% { bottom: -200px; opacity: 0; transform: scale(0.6); } 10% { opacity: 0.65; transform: scale(1); } 90% { opacity: 0.75; } 100% { bottom: 110%; opacity: 0; transform: scale(0.3); } }
         @keyframes sway { 0% { transform: translateX(0px); } 100% { transform: translateX(35px); } }
@@ -32,7 +31,7 @@
         @keyframes explode { 0% { transform: scale(0.1); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(2.0); opacity: 0; } }
 
         /* --- Contenuto Principale --- */
-        .container { padding: 20px; border-radius: 15px; position: relative; z-index: 10; /* Sopra fuochi/bolle */ max-width: 95%; max-height: 90vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #001546 rgba(0, 21, 70, 0.1); }
+        .container { padding: 20px; border-radius: 15px; position: relative; z-index: 10; max-width: 95%; max-height: 90vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #001546 rgba(0, 21, 70, 0.1); }
         .container::-webkit-scrollbar { width: 8px; } .container::-webkit-scrollbar-track { background: rgba(0, 21, 70, 0.1); border-radius: 4px; } .container::-webkit-scrollbar-thumb { background-color: #001546; border-radius: 4px; }
 
         /* --- Elementi che rimangono o cambiano alla Fine --- */
@@ -64,6 +63,82 @@
         .bank-details { font-size: 0.9em; opacity: 0.8; margin-top: 2px; } .thanks-note { text-align: center; margin-top: 15px; font-style: italic; padding-left: 0; }
         .contacts h3 { margin-bottom: 10px; } .contacts p { margin-bottom: 10px; font-size: 1.05em; }
 
+        /* --- NUOVI Stili per Wedshoots Accordion --- */
+        details.wedshoots-section {
+            margin-top: 25px;
+            border: 1px solid rgba(0, 21, 70, 0.2);
+            border-radius: 8px;
+            background-color: rgba(245, 245, 245, 0.6); /* Leggero sfondo */
+        }
+        details.wedshoots-section summary {
+            padding: 12px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none; /* Rimuove focus outline di default */
+            list-style-position: inside; /* Posiziona marker dentro */
+            text-align: center;
+            color: #001546;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        }
+        /* Rimuove/cambia il marker di default (opzionale) */
+        details.wedshoots-section summary::-webkit-details-marker { display: none; }
+        details.wedshoots-section summary::before { /* Aggiunge emoji come marker */
+            content: '📸 ';
+            margin-right: 5px;
+        }
+        details[open].wedshoots-section summary::before { /* Cambia emoji quando aperto */
+            content: '📷 ';
+        }
+
+        .wedshoots-content {
+            padding: 15px 20px;
+            border-top: 1px solid rgba(0, 21, 70, 0.1);
+            text-align: center; /* Centra contenuto interno */
+        }
+        .wedshoots-content h3 {
+             margin-top: 0; /* Rimuove margine extra per H3 interno */
+             margin-bottom: 15px;
+             text-align: center;
+        }
+        .wedshoots-content p {
+            padding-left: 0; /* Sovrascrive indentatura generale */
+            text-align: center;
+            margin-bottom: 12px;
+        }
+         .wedshoots-content .access-code {
+             font-family: 'Courier New', Courier, monospace;
+             font-weight: bold;
+             font-size: 1.2em;
+             background-color: rgba(0, 21, 70, 0.08);
+             padding: 3px 6px;
+             border-radius: 4px;
+             display: inline-block; /* Per background */
+         }
+        .qr-code-img {
+            display: block;
+            margin: 15px auto;
+            max-width: 180px; /* Limita dimensione QR */
+            height: auto;
+            border: 1px solid rgba(0, 21, 70, 0.1);
+        }
+        .store-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Spazio tra i badge */
+            flex-wrap: wrap; /* Va a capo su schermi piccoli */
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        .store-badges img {
+            height: 40px; /* Altezza fissa per i badge */
+            width: auto;
+        }
+         .wedshoots-content .album-link {
+             font-size: 0.9em;
+             opacity: 0.9;
+         }
+
     </style>
 </head>
 <body>
@@ -94,7 +169,35 @@
               <div class="info-item"><h3>Ricevimento</h3><p><em>A seguire</em></p><p>Resort Opera 02</p><p>Via Medusia 32, Levizzano Rangone (MO)</p><p><a href="https://www.google.com/maps/search/?api=1&query=Resort+Opera+02+Via+Medusia+32+Levizzano+Rangone+MO" target="_blank">📍 Apri in Google Maps</a></p></div>
               <div class="info-item iban-details"><h3>Un Pensiero per Noi</h3><p>Il vostro affetto è il dono più prezioso. 💛</p><p>Ma se desiderate accompagnarci anche con un pensiero, questo è il nostro IBAN Cointestato:</p><p><strong>Filippo Masini & Maria Gloria Natalizio</strong></p><p class="iban-code">IT98 Y020 0867 0100 0043 0399 976</p><p class="bank-details">UniCredit SpA - Filiale di Sassuolo (MO)</p><p class="thanks-note">Grazie mille 💛💛💛</p></div>
               <div class="info-item contacts"><h3>Contatti</h3><p>📞 Gloria: <a href="tel:+393404642028">340 46 42 028</a></p><p>📞 Filippo: <a href="tel:+393934504095">393 45 04 095</a></p></div>
-         </div>
+
+              <!-- *** NUOVA SEZIONE WEDSHOOTS ACCORDION *** -->
+              <hr class="separator"> <!-- Separatore opzionale -->
+              <details class="wedshoots-section">
+                  <summary>Condividi le Tue Foto!</summary>
+                  <div class="wedshoots-content">
+                      <h3>Condividi i tuoi scatti con WedShoots!</h3>
+                      <p>Abbiamo creato un album online per raccogliere tutte le foto che scatterete durante il matrimonio. Sarà un ricordo bellissimo!</p>
+                      <p>Scarica l'app gratuita <strong>WedShoots</strong>, disponibile per iPhone e Android.</p>
+                      <div class="store-badges">
+                          <a href="https://apps.apple.com/es/app/wedshoots/id660256196?mt=8" target="_blank" rel="noopener">
+                              <img src="https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/e668daf0c714437e8fa565d02540109c9ff3b858/apple-store-badge.svg" alt="Scarica da App Store">
+                          </a>
+                          <a href="https://play.google.com/store/apps/details?id=net.bodas.android.wedshoots&referrer=af_tranid%3DdoGZK3YSq-cHfMRFsdpumw%26c%3DWP-IT-LANDINGS%26pid%3DWP-Android-IT&pli=1" target="_blank" rel="noopener">
+                              <img src="https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/e668daf0c714437e8fa565d02540109c9ff3b858/google-play-badge.svg" alt="Disponibile su Google Play">
+                          </a>
+                      </div>
+                      <p>Una volta installata, puoi accedere al nostro album in due modi:</p>
+                      <p><strong>1. Scansiona questo QR Code:</strong></p>
+                      <img class="qr-code-img" src="https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/QR2.png" alt="QR Code Album Wedshoots">
+                      <p><strong>2. Oppure inserisci manualmente il codice album:</strong></p>
+                      <p><span class="access-code">ITc0aec5f2</span></p>
+                      <p class="album-link">Puoi accedere all'album anche da <a href="https://www.wedshoots.com/it/download?albumId=ITc0aec5f2" target="_blank" rel="noopener">questo link</a>.</p>
+                      <p>Non vediamo l'ora di vedere i vostri scatti! 🎉</p>
+                  </div>
+              </details>
+               <!-- *** FINE SEZIONE WEDSHOOTS *** -->
+
+         </div> <!-- Fine #info-section -->
     </div> <!-- Fine .container -->
 
     <script>
@@ -197,7 +300,7 @@
     <script>
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js') // Assicurati che sw.js sia nella stessa cartella
+            navigator.serviceWorker.register('/Masizio-countdown/sw.js', { scope: '/Masizio-countdown/' })
               .then(registration => { console.log('Service Worker registrato:', registration.scope); })
               .catch(err => { console.error('Registrazione Service Worker fallita:', err); });
           });
