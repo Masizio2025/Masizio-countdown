@@ -9,13 +9,13 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall.png",
+      "src": "https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall.png",
+      "src": "https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
