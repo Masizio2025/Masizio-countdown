@@ -1,0 +1,24 @@
+{
+  "name": "Matrimonio Masizio - Gloria & Filippo",
+  "short_name": "Masizio Sposi",
+  "description": "Conto alla rovescia e informazioni per il matrimonio di Gloria e Filippo.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#001546",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
