@@ -11,7 +11,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Masizio Sposi">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall.png"> <!-- Link Icona per Apple -->
+    <!-- *** AGGIORNATO LINK ICONA APPLE *** -->
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall512.png">
 
     <style>
         /* Reset e Stili Base */
@@ -20,7 +21,7 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #001546; display: flex; justify-content: center; align-items: center; text-align: center; position: relative; padding: 20px 0; }
 
         /* --- Contenitori Sfondo Animato --- */
-        #bubble-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; display: none; }
+        #bubble-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; display: none; /* Inizialmente nascosto */ }
         .bubble { position: absolute; background-image: url('https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/bolla.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 50%; opacity: 0; animation: rise 15s infinite ease-in-out, sway 6s infinite ease-in-out alternate, rotate 12s infinite linear; transform-origin: center center; filter: blur(0.5px); bottom: -200px; }
         @keyframes rise { 0% { bottom: -200px; opacity: 0; transform: scale(0.6); } 10% { opacity: 0.65; transform: scale(1); } 90% { opacity: 0.75; } 100% { bottom: 110%; opacity: 0; transform: scale(0.3); } }
         @keyframes sway { 0% { transform: translateX(0px); } 100% { transform: translateX(35px); } }
@@ -31,7 +32,7 @@
         @keyframes explode { 0% { transform: scale(0.1); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(2.0); opacity: 0; } }
 
         /* --- Contenuto Principale --- */
-        .container { padding: 20px; border-radius: 15px; position: relative; z-index: 10; max-width: 95%; max-height: 90vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #001546 rgba(0, 21, 70, 0.1); }
+        .container { padding: 20px; border-radius: 15px; position: relative; z-index: 10; /* Sopra fuochi/bolle */ max-width: 95%; max-height: 90vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #001546 rgba(0, 21, 70, 0.1); }
         .container::-webkit-scrollbar { width: 8px; } .container::-webkit-scrollbar-track { background: rgba(0, 21, 70, 0.1); border-radius: 4px; } .container::-webkit-scrollbar-thumb { background-color: #001546; border-radius: 4px; }
 
         /* --- Elementi che rimangono o cambiano alla Fine --- */
@@ -185,9 +186,9 @@
                 handleCountdownEnd();
             } else {
                  console.log("Data futura, avvio countdown e bolle...");
-                 startBubbles();
+                 startBubbles(); // Avvia le bolle
                  updateCountdown(); // Chiamata iniziale
-                 countdownInterval = setInterval(updateCountdown, 1000);
+                 countdownInterval = setInterval(updateCountdown, 1000); // Avvia l'aggiornamento
             }
 
         }); // Fine DOMContentLoaded
@@ -196,7 +197,7 @@
     <script>
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register('sw.js') // Assicurati che sw.js sia nella stessa cartella
               .then(registration => { console.log('Service Worker registrato:', registration.scope); })
               .catch(err => { console.error('Registrazione Service Worker fallita:', err); });
           });
