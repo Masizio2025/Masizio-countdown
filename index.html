@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrimonio Masizio - Gloria & Filippo - 24/05/2025</title>
+
+    <!-- PWA Manifest & Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#001546"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Masizio Sposi">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/iconsmall.png"> <!-- Link Icona per Apple -->
+
     <style>
         /* Reset e Stili Base */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,39 +20,24 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ffffff; color: #001546; display: flex; justify-content: center; align-items: center; text-align: center; position: relative; padding: 20px 0; }
 
         /* --- Contenitori Sfondo Animato --- */
-
-        /* Contenitore Bolle (gestito da JS) */
-        #bubble-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; display: none; /* Inizialmente nascosto */ }
+        #bubble-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: hidden; display: none; }
         .bubble { position: absolute; background-image: url('https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/bolla.jpg'); background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 50%; opacity: 0; animation: rise 15s infinite ease-in-out, sway 6s infinite ease-in-out alternate, rotate 12s infinite linear; transform-origin: center center; filter: blur(0.5px); bottom: -200px; }
         @keyframes rise { 0% { bottom: -200px; opacity: 0; transform: scale(0.6); } 10% { opacity: 0.65; transform: scale(1); } 90% { opacity: 0.75; } 100% { bottom: 110%; opacity: 0; transform: scale(0.3); } }
         @keyframes sway { 0% { transform: translateX(0px); } 100% { transform: translateX(35px); } }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* Contenitore Fuochi (gestito da JS) */
         #fireworks-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; overflow: hidden; display: none; opacity: 1; transition: opacity 2s ease-out 1s; }
         .firework { position: absolute; background-image: url('https://raw.githubusercontent.com/Masizio2025/Masizio-countdown/refs/heads/main/firework.png'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0; transform: scale(0.1); animation: explode 1.2s ease-out forwards; will-change: transform, opacity; }
         @keyframes explode { 0% { transform: scale(0.1); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(2.0); opacity: 0; } }
 
         /* --- Contenuto Principale --- */
-
-        /* Contenitore Principale (rimane visibile) */
-        .container { padding: 20px; border-radius: 15px; position: relative; z-index: 10; /* Sopra fuochi/bolle */ max-width: 95%; max-height: 90vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #001546 rgba(0, 21, 70, 0.1); }
+        .container { padding: 20px; border-radius: 15px; position: relative; z-index: 10; max-width: 95%; max-height: 90vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #001546 rgba(0, 21, 70, 0.1); }
         .container::-webkit-scrollbar { width: 8px; } .container::-webkit-scrollbar-track { background: rgba(0, 21, 70, 0.1); border-radius: 4px; } .container::-webkit-scrollbar-thumb { background-color: #001546; border-radius: 4px; }
 
         /* --- Elementi che rimangono o cambiano alla Fine --- */
         #logo img { display: block; margin: 0 auto 20px auto; max-width: min(75%, 260px); height: auto; }
         #main-title { color: #001546; font-size: clamp(1.7rem, 5vw, 2.6rem); margin-bottom: 5px; text-shadow: 0 0 6px rgba(255, 255, 255, 0.7); }
-        #final-subtitle {
-            font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: bold; margin-top: 0; margin-bottom: 15px;
-            background: linear-gradient(to right, red, orange, yellow, lime, cyan, blue, violet, red);
-            background-size: 300% 100%;
-            -webkit-background-clip: text; background-clip: text;
-            color: transparent; -webkit-text-fill-color: transparent;
-            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-            height: auto; opacity: 0; overflow: hidden;
-            transition: opacity 0.8s ease-out 0.5s, height 0.8s ease-out 0.5s;
-            animation: rainbowText 5s linear infinite paused;
-        }
+        #final-subtitle { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: bold; margin-top: 0; margin-bottom: 15px; background: linear-gradient(to right, red, orange, yellow, lime, cyan, blue, violet, red); background-size: 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); height: auto; opacity: 0; overflow: hidden; transition: opacity 0.8s ease-out 0.5s, height 0.8s ease-out 0.5s; animation: rainbowText 5s linear infinite paused; }
         #final-subtitle:not(.hidden) { opacity: 1; height: auto; animation-play-state: running; }
         #final-subtitle.hidden { opacity: 0; height: 0 !important; margin-bottom: 0; margin-top: 0; animation-play-state: paused; }
         @keyframes rainbowText { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
@@ -129,7 +123,7 @@
             let fireworksInterval = null;
             let bubbleCreationActive = true;
             const bubblesCount = 16;
-            let countdownInterval = null; // Dichiarazione per poterla pulire
+            let countdownInterval = null;
 
             // --- Logica Bolle di Sapone ---
             function createBubble() { if (!bubbleCreationActive || !bubbleContainer) return; const bubble = document.createElement('div'); bubble.classList.add('bubble'); const size = Math.random() * 120 + 60; bubble.style.width = `${size}px`; bubble.style.height = `${size}px`; bubble.style.left = `${Math.random() * 100}%`; const riseDuration = Math.random() * 10 + 10; const swayDuration = Math.random() * 3 + 4; const rotateDuration = Math.random() * 10 + 8; bubble.style.animationDuration = `${riseDuration}s, ${swayDuration}s, ${rotateDuration}s`; const delay = Math.random() * 4; bubble.style.animationDelay = `${delay}s, ${delay}s, ${delay}s`; bubbleContainer.appendChild(bubble); bubble.addEventListener('animationend', (event) => { if (event.animationName === 'rise' && bubble.parentNode === bubbleContainer) { bubbleContainer.removeChild(bubble); if (bubbleCreationActive) { setTimeout(createBubble, Math.random() * 250); } } }); }
@@ -146,13 +140,11 @@
                  const distance = weddingDateTimestamp - now;
 
                  if (distance < 0) {
-                     // Countdown terminato
-                     clearInterval(countdownInterval); // Ferma questo intervallo
-                     handleCountdownEnd(); // Gestisce l'animazione finale
-                     return; // Esce dalla funzione
+                     clearInterval(countdownInterval);
+                     handleCountdownEnd();
+                     return;
                  }
 
-                 // Calcola e mostra tempo rimanente
                  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -169,13 +161,13 @@
                 console.log("handleCountdownEnd chiamata");
                 stopBubbles(); // Ferma le bolle subito
 
-                // Nascondi elementi specifici aggiungendo la classe .hidden
+                // Nascondi elementi specifici
                 if(originalSubtitleEl) originalSubtitleEl.classList.add('hidden');
                 if(countdownEl) countdownEl.classList.add('hidden');
                 if(dateFooterEl) dateFooterEl.classList.add('hidden');
                 if(separatorEl) separatorEl.classList.add('hidden');
 
-                 // Mostra il sottotitolo finale cangiante rimuovendo la classe .hidden
+                 // Mostra il sottotitolo finale cangiante
                  if(finalSubtitleEl) {
                      finalSubtitleEl.classList.remove('hidden');
                  } else {
@@ -189,19 +181,26 @@
              // --- Logica di Avvio Iniziale ---
             const now = new Date().getTime();
             if (weddingDateTimestamp - now < 0) {
-                // Data già passata: mostra subito l'animazione finale
                 console.log("Data già passata, avvio handleCountdownEnd.");
                 handleCountdownEnd();
             } else {
-                 // Data futura: avvia il countdown normale e le bolle
                  console.log("Data futura, avvio countdown e bolle...");
-                 startBubbles(); // Avvia le bolle
-                 updateCountdown(); // Chiamata immediata per mostrare i valori iniziali
-                 countdownInterval = setInterval(updateCountdown, 1000); // Avvia l'aggiornamento ogni secondo
+                 startBubbles();
+                 updateCountdown(); // Chiamata iniziale
+                 countdownInterval = setInterval(updateCountdown, 1000);
             }
 
         }); // Fine DOMContentLoaded
     </script>
-
+    <!-- Registrazione Service Worker (per PWA) -->
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+              .then(registration => { console.log('Service Worker registrato:', registration.scope); })
+              .catch(err => { console.error('Registrazione Service Worker fallita:', err); });
+          });
+        }
+    </script>
 </body>
 </html>
